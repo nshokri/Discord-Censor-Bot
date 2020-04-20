@@ -10,6 +10,8 @@ from PIL import Image
 from io import BytesIO
 
 client = discord.Client()
+#For this bot to function, you must have a Microsoft Azure account and create a "Computer Vision" project
+#and set two environmental vars: one for your key, one for the endpoint.
 
 @client.event
 async def on_message(message):
@@ -61,13 +63,5 @@ def azureEndpoint(imageURL):
         return True
 
     return False
-  #mage_caption = analysis["description"]["captions"][0]["text"].capitalize()
 
-    # Display the image and overlay it with the caption.
-  #  image = Image.open(BytesIO(requests.get(image_url).content))
-   # plt.imshow(image)
-   # plt.axis("off")
-  #  _ = plt.title(image_caption, size="x-large", y=-0.1)
-  #  plt.show()
-
-client.run('NzAxMjQzNzAyNTY3NTAxODY0.Xpu_oA.yRTqN3OrEDBGSbxOMgJUYZ3IXE0')
+client.run('PUT YOUR DISCORD BOT TOKEN HERE')
