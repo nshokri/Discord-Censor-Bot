@@ -10,7 +10,7 @@ from PIL import Image
 from io import BytesIO
 
 client = discord.Client()
-#For this bot to function, you must have a Microsoft Azure account and create a "Computer Vision" project
+#IMPORTANT: For this bot to function, you must have a Microsoft Azure account and create a "Computer Vision" project
 #and set two environmental vars: one for your key, one for the endpoint.
 
 @client.event
@@ -18,16 +18,17 @@ async def on_message(message):
 
     if (message.author == client.user):
         return
-    if (message.content == "hello"):
-        await message.channel.send("MESSAGE FROM BOT")
-
+    # Check to see if there are any attachments in the message sent
     if (len(message.attachments) != 0):
-        for attachment in message.attachments:
+        
+        # Go through each attachment in the message (if applicable)
+        for attachment in message.attachments:        
+            # Check to see if the attachment is an image
             if ('.jpeg' in attachment.url or '.png' in attachment.url):
-                await message.channel.send("I SEE IT")
-                await message.channel.delete()
-                #if (azureEndpoint(attachment.url)):
-                   # await message.delete()
+                # Use Azure Computer Vision endpoint to determine if image is explicit
+                if (azureEndpoint(attachment.url)):
+                    # Delete the message if the endpoint deemed the image to be explicit
+                   await message.delete()
 
 def azureEndpoint(imageURL):
     # Add your Computer Vision subscription key and endpoint to your environment variables.
